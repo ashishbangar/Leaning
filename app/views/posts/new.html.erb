@@ -1,4 +1,18 @@
 <%= form_for :post, url:posts_path do |p| %>
+
+<% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@post.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @post.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <p>
     <%= p.label :title %><br>
     <%= p.text_field :title %>
@@ -13,3 +27,5 @@
     <%= p.submit %>
   </p>
 <% end %>
+
+<%= link_to 'back',posts_path%>
